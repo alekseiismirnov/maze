@@ -7,5 +7,9 @@ require 'pry'
 also_reload 'lib/**/*.rb'
 
 get '/' do
-  'Hello there!'
+  redirect to '/static/1'
+end
+
+get '/static/:id' do
+  erb :"static#{params[:id]}"
 end
