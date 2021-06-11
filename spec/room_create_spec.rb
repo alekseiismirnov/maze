@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-require 'capybara/rspec'
-require './app'
-
 require 'room'
-
-Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
 
 describe('Room', type: :feature) do
   context 'with default constructor' do
