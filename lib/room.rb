@@ -33,6 +33,10 @@ class Room
     @rooms[id]
   end
 
+  def self.remove_room(id)
+    @rooms.delete(id)
+  end
+
   def save
     self.class.add_room self
   end
@@ -41,5 +45,9 @@ class Room
     @description = params[:description]
     @doors = params[:doors]
     save
+  end
+
+  def delete
+    self.class.remove_room id
   end
 end
