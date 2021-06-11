@@ -11,7 +11,7 @@ set(:show_exceptions, false)
 describe(Room, type: :feature) do
   context 'if no rooms saved' do
     before :each do
-      Room.clean
+      Room.clear
     end
 
     it 'called .all returns empty list' do
@@ -21,6 +21,7 @@ describe(Room, type: :feature) do
 
   context 'if there is a saved room' do
     before :each do
+      Room.clear
       @description = 'Some description'
       @doors = [2,3,4,5]
       @saved_room = Room.new(@description, @doors)

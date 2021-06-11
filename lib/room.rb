@@ -13,7 +13,7 @@ class Room
     @id ||= self.class.free_id
   end
 
-  def self.clean
+  def self.clear
     @rooms = {}
   end
 
