@@ -10,6 +10,10 @@ get '/' do
   redirect to '/static/1'
 end
 
+get '/favicon.ico' do
+  redirect to '/public/favicon.ico'
+end
+
 get '/static/:id' do
   erb :"static#{params[:id]}"
 end
