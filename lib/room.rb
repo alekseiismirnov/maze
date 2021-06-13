@@ -50,4 +50,11 @@ class Room
   def delete
     self.class.remove_room id
   end
+
+  def to_hash
+    { 
+      description: @description,
+      doors: @doors
+    }
+  end  
 end

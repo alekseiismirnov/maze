@@ -17,3 +17,9 @@ end
 get '/static/:id' do
   erb :"static#{params[:id]}"
 end
+
+get '/rooms/:id' do
+  room = Room.find params[:id].to_i
+  @room_hash = room.to_hash
+  erb :room
+end
