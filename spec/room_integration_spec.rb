@@ -24,5 +24,11 @@ describe('Room view', type: :feature) do
     it 'has a description' do
       expect(page).to have_content @room.description
     end
+
+    it 'has links to other pages' do
+      @room.doors.each do |id|
+        expect(page).to have_content "Door #{id}"
+      end
+    end
   end
 end

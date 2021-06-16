@@ -52,9 +52,9 @@ class Room
   end
 
   def to_hash
-    { 
+    {
       description: @description,
       doors: @doors
     }
-  end  
+  end
 end

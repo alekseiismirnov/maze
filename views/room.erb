@@ -1,1 +1,8 @@
 <p><%= @room_hash[:description] %></p>
+<hr>
+<% @room_hash[:doors].each do |id| %>
+  <br>
+  <a href="/rooms/<%= id %>">
+    Door <%= id %>
+  </a>
+<% end %>
