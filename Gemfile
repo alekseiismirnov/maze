@@ -6,4 +6,4 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'capybara'
 gem 'webdrivers'
-
+gem 'launchy'
