@@ -6,7 +6,7 @@ describe('Room#create', type: :feature) do
   context 'from the existing room' do
     before :each do
       Room.clear
-      
+
       @enterance = Room.new 'This is the Enterance'
       @enterance.save
       @description = 'Brand new Room'
