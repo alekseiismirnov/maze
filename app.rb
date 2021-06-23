@@ -23,3 +23,17 @@ get '/rooms/:id' do
   @room_hash = room.to_hash
   erb :room
 end
+
+get '/rooms/:id/new' do
+  @id = params[:id].to_i
+  erb :room_new
+end
+
+post '/rooms/:id' do
+  ancestor_id = params[:id].to_i
+  description = params[:description]
+  room = Room.new(description, [ancestor_id])
+  room.save
+
+  redirect to "/rooms/#{room.id}"
+end

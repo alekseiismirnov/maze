@@ -53,6 +53,7 @@ class Room
 
   def to_hash
     {
+      id: @id,
       description: @description,
       doors: @doors
     }
