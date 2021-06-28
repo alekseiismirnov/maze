@@ -1,12 +1,22 @@
-<p><%= @room_hash[:description] %></p>
-<hr>
-<% @room_hash[:doors].each do |id| %>
-  <br>
-  <a href="/rooms/<%= id %>">
-    Door #<%= id %>
-  </a>
-<% end %>
-<hr>
-<a href="/rooms/<%= @room_hash[:id] %>/edit">Edit room</a>
-<br>
-<a href="/rooms/<%= @room_hash[:id] %>/new">Digg Next Room</a>
+<div class="container bg-dark pt-3">
+  <div class="room bg-light d-sm-flex align-items-center justify-content-between">
+    <div class="description p-1">
+      <%= @room_hash[:description] %>
+    </div>
+  </div>
+  <div class="doors bg-light">
+    <div class="row text-center">
+      <% @room_hash[:doors].each do |id| %>
+        <div class="col-md">
+          <a href="/rooms/<%= id %>">
+            Door #<%= id %>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="build p-1">
+    <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/edit">Edit room</a>
+    <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/new">Digg Next Room</a>
+  </div>
+</div>

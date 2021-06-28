@@ -6,7 +6,8 @@ require 'pry'
 
 also_reload 'lib/**/*.rb'
 
-get '/' do
+get '/start' do
+  Room.clear
   room = Room.new("This is the Enterance.\n Just created")
   room.save
   redirect to "/rooms/#{room.id}"
@@ -55,7 +56,7 @@ patch '/rooms/:id' do
   id = params[:id].to_i
   description = params[:description]
   room = Room.find id
-  room.update description
-
+  room.update(description: description)
+  
   redirect to "/rooms/#{room.id}"
 end
