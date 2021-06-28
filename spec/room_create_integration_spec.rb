@@ -40,7 +40,7 @@ describe('Room#create', type: :feature) do
       click_on "Door ##{@enterance.id}"
       click_on "Door ##{@room_id}"
 
-      expect(page).to have_content @description
+      expect(page.find(class: 'description').text).to eq @description
     end
   end
 end
