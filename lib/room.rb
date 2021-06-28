@@ -42,8 +42,9 @@ class Room
   end
 
   def update(params)
-    @description = params[:description]
-    @doors = params[:doors]
+    @description = params[:description] unless params[:description].nil?
+    @doors = params[:doors] unless params[:doors].nil?
+
     save
   end
 

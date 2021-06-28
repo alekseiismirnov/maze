@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
+require 'capybara/rspec'
+require './app'
 require 'room'
+
+Capybara.app = Sinatra::Application
+set(show_exceptions: false)
+
+Capybara.save_path = '~/tmp/'
 
 describe('Room#create', type: :feature) do
   context 'from the existing room' do
@@ -16,15 +23,24 @@ describe('Room#create', type: :feature) do
       click_on 'Digg Next Room'
       fill_in 'description',	with: @description
       click_on 'Finish!'
+
+      @room_id = page.current_url.split('/').last.to_i
     end
 
-    it 'redirect to new room page' do
+    it 'redirect to new room' do
       expect(page).to have_content @description
     end
 
-    it 'has a link on the ancesstor`s page' do
+    it 'has a door to the ancesstor' do
       click_on "Door ##{@enterance.id}"
       expect(page).to have_content @enterance.description
+    end
+
+    it 'adds new door to the ancesstor' do
+      click_on "Door ##{@enterance.id}"
+      click_on "Door ##{@room_id}"
+
+      expect(page).to have_content @description
     end
   end
 end

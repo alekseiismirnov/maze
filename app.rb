@@ -7,7 +7,9 @@ require 'pry'
 also_reload 'lib/**/*.rb'
 
 get '/' do
-  redirect to '/static/1'
+  room = Room.new("This is the Enterance.\n Just created")
+  room.save
+  redirect to "/rooms/#{room.id}"
 end
 
 get '/favicon.ico' do
@@ -34,6 +36,26 @@ post '/rooms/:id' do
   description = params[:description]
   room = Room.new(description, [ancestor_id])
   room.save
+
+  ancestor = Room.find ancestor_id
+  doors = ancestor.doors + [room.id]
+  ancestor.update(doors: doors)
+
+  redirect to "/rooms/#{room.id}"
+end
+
+get '/rooms/:id/edit' do
+  id = params[:id].to_i
+  @room_hash = Room.find(id).to_hash
+
+  erb :room_edit
+end
+
+patch '/rooms/:id' do
+  id = params[:id].to_i
+  description = params[:description]
+  room = Room.find id
+  room.update description
 
   redirect to "/rooms/#{room.id}"
 end
