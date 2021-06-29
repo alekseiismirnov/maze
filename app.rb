@@ -57,6 +57,6 @@ patch '/rooms/:id' do
   description = params[:description]
   room = Room.find id
   room.update(description: description)
-  
+
   redirect to "/rooms/#{room.id}"
 end

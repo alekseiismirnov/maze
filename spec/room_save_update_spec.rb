@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+require 'capybara/rspec'
+require './app'
+require 'room'
+
+Capybara.app = Sinatra::Application
+set(show_exceptions: false)
+
+Capybara.save_path = '~/tmp/'
+
 require 'room'
 
 describe(Room, type: :feature) do
@@ -17,7 +26,7 @@ describe(Room, type: :feature) do
     before :each do
       Room.clear
       @description = 'Some description'
-      @doors = [2,3,4,5]
+      @doors = [2, 3, 4, 5]
       @saved_room = Room.new(@description, @doors)
       @saved_room.save
     end
