@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
+require './lib/room'
 
 also_reload 'lib/**/*.rb'
 
@@ -59,4 +60,23 @@ patch '/rooms/:id' do
   room.update(description: description)
 
   redirect to "/rooms/#{room.id}"
+end
+
+delete '/rooms/:id' do
+  id = params[:id].to_i
+  room = Room.find id
+  rooms_connected = room.doors
+
+  room.delete
+
+  rooms_connected.each do |door|
+    room = Room.find door
+    doors_updated = room.doors.clone
+    doors_updated.delete id
+    room.update(doors: doors_updated)
+  end
+
+  ancestor_id = rooms_connected.min # ids are sequentially grow
+
+  redirect to "/rooms/#{ancestor_id}"
 end

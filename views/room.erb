@@ -15,8 +15,13 @@
       <% end %>
     </div>
   </div>
-  <div class="build p-1">
+  <div class="build p-1 container-fluid">
+  <form action="/rooms/<%= @room_hash[:id] %>" method="post" class="form-inline">
     <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/edit">Edit room</a>
     <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/new">Digg Next Room</a>
+    
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
   </div>
 </div>

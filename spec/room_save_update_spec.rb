@@ -9,8 +9,6 @@ set(show_exceptions: false)
 
 Capybara.save_path = '~/tmp/'
 
-require 'room'
-
 describe(Room, type: :feature) do
   context 'if no rooms saved' do
     before :each do
