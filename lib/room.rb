@@ -59,4 +59,8 @@ class Room
       doors: @doors
     }
   end
+
+  def all_items
+    []
+  end
 end
