@@ -70,4 +70,8 @@ class Room
     @item_ids << item.id
     save
   end
+
+  def get_item(item)
+    @item_ids.delete item.id
+  end
 end

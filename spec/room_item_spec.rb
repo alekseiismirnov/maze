@@ -27,5 +27,10 @@ describe Room do
     it 'Room#all_returns a list of items' do
       expect(@room.all_items).to eq @items
     end
+
+    it 'Room#get_item reduces number of items' do
+      @room.get_item @items[0]
+      expect(@room.all_items.length).to eq @items.length - 1
+    end
   end
 end
