@@ -11,6 +11,7 @@ class Room
     @description, @doors, @id = args
     @doors ||= []
     @id ||= self.class.free_id
+    @item_ids = [] # wanna to change code before?
   end
 
   def self.clear
@@ -61,6 +62,12 @@ class Room
   end
 
   def all_items
-    []
+    @item_ids.map { |id| Item.find(id) }
+  end
+
+  def put_item(item)
+    # we assume item to be saved, exsceptions are not yet learned *smile*
+    @item_ids << item.id
+    save
   end
 end

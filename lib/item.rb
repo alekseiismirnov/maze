@@ -29,6 +29,10 @@ class Item
     @items[item.id] = item
   end
 
+  def self.find(id)
+    @items[id]
+  end
+
   def ==(other)
     @type == other.type && @detail == other.detail
   end
