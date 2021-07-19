@@ -39,6 +39,15 @@ class Item
 
   def save
     id = self.class.free_id
+    @id = id
     self.class.add_item Item.new(type: @type, detail: @detail, id: id)
+  end
+
+  def to_hash
+    {
+      type: @type,
+      detail: @detail,
+      id: @id
+    }
   end
 end

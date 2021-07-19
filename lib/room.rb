@@ -2,7 +2,7 @@
 
 # description: text, doors: list of id`s
 class Room
-  attr_accessor :description, :doors, :id
+  attr_accessor :description, :doors, :id, :item_ids
 
   @rooms = {}
   @total_rows = 0
@@ -28,6 +28,7 @@ class Room
 
   def self.add_room(room)
     @rooms[room.id] = Room.new(room.description, room.doors, room.id)
+    @rooms[room.id].item_ids = room.item_ids.clone
   end
 
   def self.find(id)
@@ -57,7 +58,8 @@ class Room
     {
       id: @id,
       description: @description,
-      doors: @doors
+      doors: @doors,
+      item_ids: @item_ids
     }
   end
 

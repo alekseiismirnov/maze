@@ -4,8 +4,16 @@
       <%= @room_hash[:description] %>
     </div>
     <div class="items p-1">
-    <h2>Items in the room:</h2>
-      <p>clock</p>
+      <h2>Items in the room:</h2>
+      <% @items.each do |item|%>
+        <ul>
+          <li>
+            <a href="/items/<%= item[:id] %>">
+              <%= item[:type] %>
+            </a>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </div>
   <div class="doors bg-light">
@@ -20,10 +28,9 @@
     </div>
   </div>
   <div class="build p-1 container-fluid">
-  <form action="/rooms/<%= @room_hash[:id] %>" method="post" class="form-inline">
-    <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/edit">Edit room</a>
-    <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/new">Digg Next Room</a>
-    
+    <form action="/rooms/<%= @room_hash[:id] %>" method="post" class="form-inline">
+      <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/edit">Edit room</a>
+      <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/new">Digg Next Room</a>
       <input type="hidden" name="_method" value="delete">
       <button class="btn btn-danger" type="submit">Delete</button>
     </form>

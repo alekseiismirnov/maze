@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'capybara/rspec'
 require './app'
 require 'room'
@@ -20,7 +22,7 @@ describe(Item, type: :feature) do
     before :each do
       @clock = Item.new(type: 'clock', detail: 'rustic cookoo clock in perfect condition')
       @key = Item.new(type: 'key', detail: 'seems there is no lock for it anywhere')
-      
+
       @clock.save
       @key.save
       @enterance.put_item @clock
@@ -31,6 +33,11 @@ describe(Item, type: :feature) do
       visit "/rooms/#{@enterance.id}"
       expect(page).to have_content @clock.type
     end
+
+    it 'is possible to click on item type and get its description' do
+      visit "/rooms/#{@enterance.id}"
+      click_on @key.type
+      expect(page).to have_content @key.detail
+    end
   end
-  
 end

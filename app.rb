@@ -4,6 +4,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
 require './lib/room'
+require './lib/item'
 
 also_reload 'lib/**/*.rb'
 
@@ -11,6 +12,13 @@ get '/start' do
   Room.clear
   room = Room.new("This is the Enterance.\n Just created")
   room.save
+
+  Item.clear
+  nail = Item.new(type: 'nail', detail: 'A rusty nail')
+  nail.save
+
+  room.put_item(nail)
+
   redirect to "/rooms/#{room.id}"
 end
 
@@ -24,7 +32,10 @@ end
 
 get '/rooms/:id' do
   room = Room.find params[:id].to_i
+
   @room_hash = room.to_hash
+  @items = room.item_ids.map { |id| Item.find(id).to_hash }
+
   erb :room
 end
 
@@ -79,4 +90,11 @@ delete '/rooms/:id' do
   ancestor_id = rooms_connected.min # ids are sequentially grow
 
   redirect to "/rooms/#{ancestor_id}"
+end
+
+get '/items/:id' do
+  id = params[:id].to_i
+  @item = Item.find(id).to_hash
+
+  erb :item
 end
