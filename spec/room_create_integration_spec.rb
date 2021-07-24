@@ -13,6 +13,7 @@ describe('Room#create', type: :feature) do
   context 'from the existing room' do
     before :each do
       Room.clear
+      Inventory.flush
 
       @enterance = Room.new 'This is the Enterance'
       @enterance.save

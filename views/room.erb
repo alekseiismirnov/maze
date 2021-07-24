@@ -8,7 +8,7 @@
       <% @items.each do |item|%>
         <ul>
           <li>
-            <a href="/items/<%= item[:id] %>">
+            <a href="/rooms/<%= @room_hash[:id] %>/items/<%= item[:id] %>">
               <%= item[:type] %>
             </a>
           </li>
@@ -37,5 +37,14 @@
   </div>
   <div class="inventory p-1 container bg-light align-items-center justify-content-between">
     <h2>Inventory</h2>
+    <ul>
+      <% @inventory_items.each do |item| %>
+        <li>
+          <a href="/inventory/items/<%= item[:id] %>">
+            <%= item[:type] %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

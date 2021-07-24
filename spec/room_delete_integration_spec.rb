@@ -12,6 +12,9 @@ Capybara.save_path = '~/tmp/'
 describe('Room#delete', type: :feature) do
   context 'delete room with `delete` button' do
     before :each do
+      Room.clear
+      Inventory.flush
+
       @enterance = Room.new('The Enterance')
       @enterance.save
       @room = Room.new('Room to demolish', [@enterance.id])

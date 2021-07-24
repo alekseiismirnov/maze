@@ -13,7 +13,8 @@ Capybara.save_path = '~/tmp'
 describe(Item, type: :feature) do
   before :each do
     Room.clear
-
+    Inventory.flush
+    
     @enterance = Room.new 'This is the Enterance'
     @enterance.save
   end

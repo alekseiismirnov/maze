@@ -5,6 +5,7 @@ require 'sinatra/reloader'
 require 'pry'
 require './lib/room'
 require './lib/item'
+require './lib/inventory'
 
 also_reload 'lib/**/*.rb'
 
@@ -17,7 +18,12 @@ get '/start' do
   nail = Item.new(type: 'nail', detail: 'A rusty nail')
   nail.save
 
+  key = Item.new(type: 'heavy key', detail: 'heavy key for the left hand')
+  key.save
+
   room.put_item(nail)
+  Inventory.flush
+  Inventory.add_item_id key.id
 
   redirect to "/rooms/#{room.id}"
 end
@@ -35,6 +41,7 @@ get '/rooms/:id' do
 
   @room_hash = room.to_hash
   @items = room.item_ids.map { |id| Item.find(id).to_hash }
+  @inventory_items = Inventory.all_items.map(&:to_hash)
 
   erb :room
 end
@@ -92,9 +99,20 @@ delete '/rooms/:id' do
   redirect to "/rooms/#{ancestor_id}"
 end
 
-get '/items/:id' do
+get '/rooms/:room_id/items/:id' do
   id = params[:id].to_i
   @item = Item.find(id).to_hash
+  @room_id = params[:room_id]
 
   erb :item
+end
+
+get '/rooms/:room_id/items/:id/take' do
+  room_id = params[:room_id].to_i
+  room = Room.find room_id
+  item = Item.find params[:id].to_i
+  room.get_item item
+  Inventory.add_item_id item.id
+
+  redirect "/rooms/#{room_id}"
 end
