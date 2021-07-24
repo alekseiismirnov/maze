@@ -14,7 +14,7 @@ class Inventory
     @item_ids << item_id
   end
 
-  def self.remove_ite_id(item_id)
+  def self.remove_item_id(item_id)
     @item_ids.delete item_id
   end
 
