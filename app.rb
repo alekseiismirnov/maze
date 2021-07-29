@@ -116,3 +116,15 @@ get '/rooms/:room_id/items/:id/take' do
 
   redirect "/rooms/#{room_id}"
 end
+
+get '/rooms/:room_id/inventory/:id/drop' do
+  room_id = params[:room_id].to_i
+  item_id = params[:id].to_i
+  room = Room.find room_id
+  item = Item.find params[:id].to_i
+
+  room.put_item item
+  Inventory.remove_item_id item_id
+
+  redirect "/rooms/#{room_id}"
+end

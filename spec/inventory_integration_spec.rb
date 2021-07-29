@@ -54,7 +54,7 @@ describe(Inventory, type: :feature) do
     end
 
     it 'item will not be in the room' do
-      within('.items') do 
+      within('.items') do
         expect(page).to have_no_content @hedgehog.type
       end
     end

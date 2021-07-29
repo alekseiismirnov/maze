@@ -40,8 +40,9 @@
     <ul>
       <% @inventory_items.each do |item| %>
         <li>
-          <a href="/inventory/items/<%= item[:id] %>">
-            <%= item[:type] %>
+          <span class="inventory_item"> <%= item[:type] %> </span>
+          <a class="btn btn-secondary" role="button" href="/rooms/<%= @room_hash[:id] %>/inventory/<%= item[:id] %>/drop">
+            Drop
           </a>
         </li>
       <% end %>
