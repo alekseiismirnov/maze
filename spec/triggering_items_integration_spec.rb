@@ -30,6 +30,7 @@ describe('Exit room', type: :feature) do
 
   context('Triggering item is in inventory') do
     it 'there is the message about exit' do
+      Inventory.add_item_id @exit_trigger.id
       expect(page).to have_content 'EXIT sighn'
     end
   end
