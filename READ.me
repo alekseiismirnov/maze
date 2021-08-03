@@ -34,9 +34,15 @@ Create a Sinatra application with CRUD functionality where users can traverse a 
 + Allow a user to pick up items from various rooms of the maze.
   + And drop it from inventory to the room.
   + It will involve the **inventory section**.
-- Some of these items (such as a key or a flashlight) might be necessary 
-to successfully escape.
-
+- Some of these items (such as a key or a flashlight) 
+  might be necessary to successfully escape.
+  - All rooms have an additional property, indicating
+    if it is an "exit" room.
+  - It could be triggered by the particular item 
+    in the inventory.
+  - Room with the exit should have a correspondent 
+    description.
+  
 - Add levers to some of the rooms. 
 - A user will only be able to pass through the door to the exit 
 if the levers are in a certain position.

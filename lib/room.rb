@@ -11,7 +11,8 @@ class Room
     @description, @doors, @id = args
     @doors ||= []
     @id ||= self.class.free_id
-    @item_ids = [] # wanna to change code before?
+    @description += 'and the EXIT sighn'
+    @item_ids = []
   end
 
   def self.clear
