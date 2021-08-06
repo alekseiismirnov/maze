@@ -21,4 +21,8 @@ class Inventory
   def self.all_items
     @item_ids.map { |id| Item.find id }
   end
+
+  def self.any? id
+    @item_ids.any? id
+  end
 end

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require './lib/inventory'
+
 # description: text, doors: list of id`s
 class Room
-  attr_accessor :description, :doors, :id, :item_ids
+  attr_accessor :description, :doors, :id, :item_ids, :trigger_id
 
   @rooms = {}
   @total_rows = 0
@@ -11,8 +13,8 @@ class Room
     @description, @doors, @id = args
     @doors ||= []
     @id ||= self.class.free_id
-    @description += 'and the EXIT sighn'
     @item_ids = []
+    @trigger_id = nil
   end
 
   def self.clear
@@ -30,6 +32,7 @@ class Room
   def self.add_room(room)
     @rooms[room.id] = Room.new(room.description, room.doors, room.id)
     @rooms[room.id].item_ids = room.item_ids.clone
+    @rooms[room.id].trigger_id = room.trigger_id
   end
 
   def self.find(id)
@@ -76,5 +79,14 @@ class Room
 
   def get_item(item)
     @item_ids.delete item.id
+  end
+
+  def triggered?
+    Inventory.any? @trigger_id
+  end
+
+  def add_trigger(trigger_item)
+    @trigger_id = trigger_item.id
+    save if @id
   end
 end

@@ -25,6 +25,7 @@ get '/start' do
   Inventory.flush
   Inventory.add_item_id key.id
 
+  room.add_trigger key
   redirect to "/rooms/#{room.id}"
 end
 
@@ -40,6 +41,7 @@ get '/rooms/:id' do
   room = Room.find params[:id].to_i
 
   @room_hash = room.to_hash
+  @room_hash[:description] += "\n EXIT sighn" if room.triggered?
   @items = room.item_ids.map { |id| Item.find(id).to_hash }
   @inventory_items = Inventory.all_items.map(&:to_hash)
 
