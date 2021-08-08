@@ -49,7 +49,7 @@ class Room
 
   def update(params)
     @description = params[:description] unless params[:description].nil?
-    @doors = params[:doors] unless params[:doors].nil?
+    @doors = params[:doors].clone unless params[:doors].nil?
 
     save
   end
@@ -62,7 +62,7 @@ class Room
     {
       id: @id,
       description: @description,
-      doors: @doors,
+      doors: @doors.clone,
       item_ids: @item_ids
     }
   end
