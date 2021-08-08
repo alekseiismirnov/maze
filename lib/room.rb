@@ -89,4 +89,8 @@ class Room
     @trigger_id = trigger_item.id
     save if @id
   end
+
+  def all_doors
+    @doors.clone
+  end
 end
