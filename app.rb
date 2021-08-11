@@ -44,7 +44,7 @@ get '/rooms/:id' do
   @room_hash[:description] += "\n EXIT sighn" if room.triggered?
   @items = room.item_ids.map { |id| Item.find(id).to_hash }
   @inventory_items = Inventory.all_items.map(&:to_hash)
-
+  
   erb :room
 end
 

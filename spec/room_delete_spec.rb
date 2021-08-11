@@ -10,7 +10,7 @@ describe 'Room#delete' do
       @saved_room = Room.new('Common room', [@enterance.id])
       @saved_room.save
 
-      @enterance.update(doors: @saved_room.id)
+      @enterance.update(doors: [@saved_room.id])
     end
 
     it 'can not be found after #delete' do

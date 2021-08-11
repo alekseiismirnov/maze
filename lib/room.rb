@@ -4,7 +4,8 @@ require './lib/inventory'
 
 # description: text, doors: list of id`s
 class Room
-  attr_accessor :description, :doors, :id, :item_ids, :trigger_id
+  attr_accessor :description, :id, :item_ids, :trigger_id
+  attr_writer :doors
 
   @rooms = {}
   @total_rows = 0
@@ -15,6 +16,7 @@ class Room
     @id ||= self.class.free_id
     @item_ids = []
     @trigger_id = nil
+    @levers = {}
   end
 
   def self.clear
@@ -62,7 +64,7 @@ class Room
     {
       id: @id,
       description: @description,
-      doors: @doors.clone,
+      doors: @doors.select { |id| show_door? id },
       item_ids: @item_ids
     }
   end
@@ -92,5 +94,20 @@ class Room
 
   def all_doors
     @doors.clone
+  end
+
+  def add_lever(door_id, position_open)
+    @levers[door_id] = { position: 0, positon_open: position_open }
+
+    save
+  end
+
+  def doors
+    @doors.select { |id| show_door? id }
+  end
+
+  def show_door?(door_id)
+    lever = @levers[door_id]
+    !lever || (lever[:position] == lever[:position_open])
   end
 end
